@@ -39,12 +39,47 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 .env
-
-# pkgdown site
-docs/
+# pkgdown site (not used in this project)
+# docs/
 
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
+# ============================================================
+# TCGA CRC to OMOP: project-specific protections
+# ============================================================
+
+# Raw, intermediate and converted patient-level data
+# Allow only the explanatory README inside data/
+data/*
+!data/README.md
+
+# Downloaded archives
+*.zip
+*.tar.gz
+*.tgz
+
+# OMOP Athena vocabularies
+vocab/
+vocabulary/
+CONCEPT*.csv
+VOCABULARY.csv
+DOMAIN.csv
+DRUG_STRENGTH.csv
+
+# Credentials and secrets
+.env
+.env.*
+.Renviron
+*.pem
+*credentials*
+*secret*
+
+# Local database files
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.sqlite3
+*.db
