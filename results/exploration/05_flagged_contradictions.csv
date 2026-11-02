@@ -1,0 +1,11 @@
+patient_id,issue
+TCGA-AA-3492,days to death differs (GDC vs TCGA-CDR)
+TCGA-AA-A03F,days to death differs (GDC vs TCGA-CDR)
+TCGA-AG-3574,days to death differs (GDC vs TCGA-CDR)
+TCGA-DM-A1D6,days to death differs (GDC vs TCGA-CDR)
+TCGA-G4-6298,days to death differs (GDC vs TCGA-CDR)
+TCGA-G4-6302,days to death differs (GDC vs TCGA-CDR)
+TCGA-G4-6626,days to death differs (GDC vs TCGA-CDR)
+TCGA-F5-6702,death days in GDC only
+TCGA-CL-4957,vital status: GDC DEAD vs TCGA-CDR ALIVE
+TCGA-F5-6702,vital status: GDC DEAD vs TCGA-CDR ALIVE

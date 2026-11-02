@@ -1,0 +1,4 @@
+source_a,source_b,n_a,n_b,n_both,n_only_a,n_only_b
+GDC R46,TCGA-CDR,633,629,629,4,0
+GDC R46,cBioPortal,633,594,594,39,0
+TCGA-CDR,cBioPortal,629,594,591,38,3

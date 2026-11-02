@@ -1,0 +1,5 @@
+in_gdc,in_cdr,in_cbio,n_patients
+TRUE,TRUE,TRUE,591
+TRUE,TRUE,FALSE,38
+TRUE,FALSE,TRUE,3
+TRUE,FALSE,FALSE,1

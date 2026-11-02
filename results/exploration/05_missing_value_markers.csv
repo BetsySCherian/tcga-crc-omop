@@ -1,0 +1,42 @@
+source,field,marker,n
+GDC R46,age_at_dx_days,<NA>,7
+GDC R46,age_at_index,<NA>,4
+GDC R46,age_obfuscated,<NA>,2
+GDC R46,days_to_birth,<NA>,6
+GDC R46,days_to_death,<NA>,504
+GDC R46,edition,<NA>,77
+GDC R46,histology,<NA>,2
+GDC R46,histology,NOT REPORTED,3
+GDC R46,last_fu_diag,<NA>,71
+GDC R46,last_fu_max,<NA>,6
+GDC R46,path_m,<NA>,14
+GDC R46,path_n,<NA>,6
+GDC R46,path_t,<NA>,6
+GDC R46,sex,UNKNOWN,4
+GDC R46,site_origin,<NA>,2
+GDC R46,site_origin,NOT REPORTED,3
+GDC R46,site_resection,<NA>,2
+GDC R46,site_resection,NOT REPORTED,3
+GDC R46,stage,<NA>,25
+GDC R46,vital_status,NOT REPORTED,4
+TCGA-CDR,days_to_birth,<NA>,2
+TCGA-CDR,days_to_death,<NA>,501
+TCGA-CDR,histology_txt,[DISCREPANCY],3
+TCGA-CDR,histology_txt,[NOT AVAILABLE],8
+TCGA-CDR,last_fu,<NA>,115
+TCGA-CDR,os_days,<NA>,1
+TCGA-CDR,stage,[DISCREPANCY],8
+TCGA-CDR,stage,[NOT AVAILABLE],12
+cBioPortal,age_years,<empty>,2
+cBioPortal,days_to_birth,<empty>,4
+cBioPortal,edition,<empty>,70
+cBioPortal,histology,<empty>,3
+cBioPortal,last_fu,<empty>,50
+cBioPortal,os_months,<empty>,4
+cBioPortal,os_status,<empty>,3
+cBioPortal,path_m,<empty>,9
+cBioPortal,path_n,<empty>,2
+cBioPortal,path_t,<empty>,2
+cBioPortal,sex,<empty>,2
+cBioPortal,site_code,<empty>,3
+cBioPortal,stage,<empty>,14

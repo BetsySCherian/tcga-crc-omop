@@ -1,0 +1,5 @@
+age_obfuscated,birth_differs,n_patients
+FALSE,FALSE,607
+TRUE,FALSE,15
+TRUE,TRUE,4
+NA,FALSE,1

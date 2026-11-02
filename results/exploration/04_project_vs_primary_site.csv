@@ -1,0 +1,19 @@
+project_gdc,site,n_patients
+TCGA-COAD,Sigmoid colon,113
+TCGA-COAD,Ascending colon,103
+TCGA-COAD,"Colon, NOS",97
+TCGA-COAD,Cecum,85
+TCGA-COAD,Transverse colon,21
+TCGA-COAD,Descending colon,17
+TCGA-COAD,Hepatic flexure of colon,10
+TCGA-COAD,Rectosigmoid junction,7
+TCGA-COAD,Splenic flexure of colon,5
+TCGA-COAD,Not Reported,2
+TCGA-COAD,NA,1
+TCGA-READ,"Rectum, NOS",90
+TCGA-READ,Rectosigmoid junction,71
+TCGA-READ,"Colon, NOS",6
+TCGA-READ,"Connective, subcutaneous and other soft tissues of abdomen",2
+TCGA-READ,Not Reported,1
+TCGA-READ,Unknown primary site,1
+TCGA-READ,NA,1

@@ -1,0 +1,2 @@
+variable,source_a,source_b,value_a,value_b,n_patients
+vital status,GDC R46,TCGA-CDR,DEAD,ALIVE,2

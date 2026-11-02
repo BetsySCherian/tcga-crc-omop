@@ -1,0 +1,11 @@
+source,unit,project,n_rows,n_unique_patients,n_duplicate_rows,n_missing_id
+GDC R46,case,All,633,633,0,0
+GDC R46,case,TCGA-COAD,461,461,0,0
+GDC R46,case,TCGA-READ,172,172,0,0
+TCGA-CDR,patient,All,629,629,0,0
+TCGA-CDR,patient,TCGA-COAD,459,459,0,0
+TCGA-CDR,patient,TCGA-READ,170,170,0,0
+cBioPortal PanCanAtlas,patient table,All,594,594,0,0
+cBioPortal PanCanAtlas,patient table,TCGA-COAD,439,439,0,0
+cBioPortal PanCanAtlas,patient table,TCGA-READ,155,155,0,0
+cBioPortal PanCanAtlas,sample table,All,594,594,0,0

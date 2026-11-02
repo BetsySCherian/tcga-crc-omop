@@ -1,0 +1,4 @@
+test,n_violations,nested
+TCGA-CDR within GDC,0,TRUE
+cBioPortal within GDC,0,TRUE
+cBioPortal within TCGA-CDR,3,FALSE

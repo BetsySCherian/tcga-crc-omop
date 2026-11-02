@@ -1,0 +1,3 @@
+comparison,n_compared,n_discordant
+GDC vs TCGA-CDR,629,0
+GDC vs cBioPortal,594,0

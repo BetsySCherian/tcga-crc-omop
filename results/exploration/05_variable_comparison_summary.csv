@@ -1,0 +1,31 @@
+variable,source_a,source_b,n_in_both_sources,agree,disagree,missing_a_only,missing_b_only,missing_both
+sex,GDC R46,TCGA-CDR,629,629,0,0,0,0
+sex,GDC R46,cBioPortal,594,591,0,1,0,2
+days_to_birth,GDC R46,TCGA-CDR,629,623,4,0,0,2
+days_to_birth,GDC R46,cBioPortal,594,586,3,1,0,4
+age_years (GDC days/365.25),GDC R46,TCGA-CDR,629,605,21,3,0,0
+age_years (GDC days/365),GDC R46,TCGA-CDR,629,614,12,3,0,0
+age_years (GDC age_at_index),GDC R46,TCGA-CDR,629,608,21,0,0,0
+age_years (GDC days/365),GDC R46,cBioPortal,594,577,12,3,0,2
+age_years,TCGA-CDR,cBioPortal,591,591,0,0,0,0
+site ICD-O-3 (GDC tissue_or_organ_of_origin),GDC R46,cBioPortal,594,590,0,1,1,2
+site ICD-O-3 (GDC site_of_resection_or_biopsy),GDC R46,cBioPortal,594,388,200,3,3,0
+histology ICD-O-3,GDC R46,cBioPortal,594,590,0,1,1,2
+mucinous (8480/3 vs CDR text),GDC R46,TCGA-CDR,629,610,7,1,11,0
+AJCC pathologic sub-stage,GDC R46,TCGA-CDR,629,608,0,1,0,20
+AJCC pathologic sub-stage,GDC R46,cBioPortal,594,574,0,6,0,14
+AJCC pathologic sub-stage,TCGA-CDR,cBioPortal,591,574,0,5,0,12
+AJCC stage group (I-IV),GDC R46,TCGA-CDR,629,608,0,1,0,20
+AJCC stage group (I-IV),GDC R46,cBioPortal,594,574,0,6,0,14
+AJCC edition,GDC R46,cBioPortal,594,523,0,1,0,70
+pathologic T,GDC R46,cBioPortal,594,591,0,1,0,2
+pathologic N,GDC R46,cBioPortal,594,591,0,1,0,2
+pathologic M,GDC R46,cBioPortal,594,584,0,1,0,9
+vital status,GDC R46,TCGA-CDR,629,627,2,0,0,0
+vital status,GDC R46,cBioPortal,594,589,2,0,0,3
+vital status,TCGA-CDR,cBioPortal,591,591,0,0,0,0
+days to death,GDC R46,TCGA-CDR,629,121,7,0,1,500
+days to last follow-up (GDC diagnosis field),GDC R46,TCGA-CDR,629,488,11,15,63,52
+days to last follow-up (GDC max follow_up record),GDC R46,TCGA-CDR,629,501,12,1,114,1
+days to last follow-up,TCGA-CDR,cBioPortal,591,477,5,61,2,46
+OS time in days (cBio months x 365/12),TCGA-CDR,cBioPortal,591,590,0,0,0,1

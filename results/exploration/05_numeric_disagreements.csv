@@ -1,0 +1,9 @@
+variable,source_a,source_b,n_disagree,median_diff_a_minus_b,min_diff,max_diff,n_within_1
+age_years (GDC days/365.25),GDC R46,TCGA-CDR,21,-1,-1,-1,21
+age_years (GDC days/365),GDC R46,TCGA-CDR,12,1,1,1,12
+age_years (GDC age_at_index),GDC R46,TCGA-CDR,21,-1,-1,-1,21
+days_to_birth,GDC R46,TCGA-CDR,4,1,1,1,4
+days_to_death,GDC R46,TCGA-CDR,7,-948,-2047,-91,0
+last follow-up (GDC diagnosis field),GDC R46,TCGA-CDR,11,-580,-3262,417,0
+last follow-up (GDC max follow_up),GDC R46,TCGA-CDR,12,-584,-3262,417,0
+last follow-up,TCGA-CDR,cBioPortal,5,15,3,365,0
