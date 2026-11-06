@@ -1,0 +1,16 @@
+metric,value
+JSON cases,633
+TSV rows,2443
+TSV columns,202
+Unique TSV cases,633
+Total diagnoses,878
+Patients with multiple diagnoses,182
+Patients without primary diagnosis label,2
+Total treatment records,2354
+Treatment records marked yes,1086
+Patients with treatment marked yes,275
+Patients without treatment records,73
+Patients without follow-up records,5
+Maximum diagnoses per patient,5
+Maximum treatment records per patient,32
+Maximum follow-up records per patient,14
