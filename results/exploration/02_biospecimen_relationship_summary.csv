@@ -1,0 +1,7 @@
+"child","parent","rows_missing_parent_id","distinct_child_ids_with_parent","child_ids_with_multiple_parents","max_parents_per_child","duplicate_child_parent_pairs"
+"portion","sample",0,3217,0,1,0
+"analyte","portion",0,4436,0,1,0
+"aliquot","analyte",0,12574,0,1,0
+"slide","portion",0,1998,35,3,0
+"slide","sample",0,1998,0,1,37
+"sample","case",0,2037,0,1,0

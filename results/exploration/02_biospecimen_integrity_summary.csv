@@ -1,0 +1,6 @@
+"child","parent","missing_fk_rows","unmatched_distinct_parent_ids"
+"portion","sample",0,0
+"analyte","portion",0,0
+"aliquot","analyte",0,0
+"slide","portion",0,0
+"slide","sample",0,0
