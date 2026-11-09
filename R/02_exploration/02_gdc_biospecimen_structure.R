@@ -144,3 +144,43 @@ write.csv(integrity_summary, file.path(output_dir, "02_biospecimen_integrity_sum
 write.csv(slide_summary, file.path(output_dir, "02_biospecimen_slide_summary.csv"), row.names = FALSE)
 write.csv(slide_frequency, file.path(output_dir, "02_biospecimen_slide_frequency.csv"), row.names = FALSE)
 cat("\nCompleted. Aggregate outputs saved in: ", output_dir, "\n", sep = "")
+
+
+
+#  Clinical–biospecimen case linkage validation -------------------------
+
+# Read GDC clinical JSON
+clinical <- jsonlite::fromJSON(
+  "data/raw/gdc_r46/clinical/clinical.cohort.2026-10-29.json"
+)
+
+# Extract unique case IDs from clinical and biospecimen sources
+clinical_ids <- unique(clinical$case_id)
+biospecimen_ids <- unique(tables$sample$`cases.case_id`)
+
+# Compare case identifiers between the two datasets
+linkage_summary <- data.frame(
+  metric = c(
+    "Clinical cases",
+    "Biospecimen cases",
+    "Biospecimen cases absent from clinical",
+    "Clinical cases without samples"
+  ),
+  value = c(
+    length(clinical_ids),
+    length(biospecimen_ids),
+    length(setdiff(biospecimen_ids, clinical_ids)),
+    length(setdiff(clinical_ids, biospecimen_ids))
+  )
+)
+
+# Display results
+cat("\n=== CLINICAL–BIOSPECIMEN CASE LINKAGE ===\n")
+print(linkage_summary, row.names = FALSE)
+
+# Save aggregate results
+write.csv(
+  linkage_summary,
+  file.path(output_dir, "02_clinical_biospecimen_linkage.csv"),
+  row.names = FALSE
+)
