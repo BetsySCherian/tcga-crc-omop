@@ -1,0 +1,15 @@
+"metric","value"
+"other_clinical_attribute_rows",590
+"unique_other_clinical_attribute_ids",590
+"missing_other_clinical_attribute_ids",0
+"orphan_attribute_follow_up_links",0
+"orphan_attribute_patient_links",0
+"attribute_parent_patient_mismatches",0
+"attribute_parent_pointer_mismatches",0
+"attribute_json_pointer_mismatches",0
+"follow_ups_with_attributes",590
+"patients_with_attributes",450
+"attribute_direct_source_fields",11
+"attribute_array_source_fields",2
+"timepoint_initial_diagnosis",418
+"timepoint_prior_to_diagnosis",172

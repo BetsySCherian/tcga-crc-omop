@@ -1,0 +1,16 @@
+"metric","value"
+"treatment_rows",2354
+"unique_treatment_ids",2354
+"missing_treatment_ids",0
+"orphan_treatment_diagnosis_links",0
+"orphan_treatment_patient_links",0
+"treatment_parent_patient_mismatches",0
+"treatment_json_pointer_mismatches",0
+"diagnoses_with_treatment",789
+"patients_with_treatment",560
+"treatment_direct_source_fields",26
+"treatment_array_source_fields",2
+"treatment_status_yes",1086
+"treatment_status_no",1190
+"treatment_status_unknown",76
+"treatment_status_not_reported",2

@@ -1,0 +1,15 @@
+"metric","value"
+"portion_rows",3217
+"unique_portion_ids",3217
+"missing_portion_ids",0
+"orphan_portion_sample_links",0
+"orphan_portion_patient_links",0
+"portion_case_id_mismatches",0
+"portion_sample_barcode_mismatches",0
+"portion_case_barcode_mismatches",0
+"portion_project_mismatches",0
+"samples_with_portions",2037
+"patients_with_portions",633
+"portion_direct_source_fields",7
+"coad_portion_rows",2357
+"read_portion_rows",860

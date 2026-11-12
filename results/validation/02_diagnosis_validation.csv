@@ -1,0 +1,9 @@
+"metric","value"
+"diagnosis_rows",878
+"unique_diagnosis_ids",878
+"missing_diagnosis_ids",0
+"orphan_diagnosis_patient_links",0
+"patients_with_diagnosis",633
+"diagnosis_scalar_source_fields",30
+"nested_treatment_records_preserved_in_json",2354
+"nested_pathology_records_preserved_in_json",631

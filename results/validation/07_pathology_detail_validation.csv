@@ -1,0 +1,12 @@
+"metric","value"
+"pathology_detail_rows",631
+"unique_pathology_detail_ids",631
+"missing_pathology_detail_ids",0
+"orphan_pathology_detail_diagnosis_links",0
+"orphan_pathology_detail_patient_links",0
+"pathology_parent_patient_mismatches",0
+"pathology_parent_pointer_mismatches",0
+"pathology_json_pointer_mismatches",0
+"diagnoses_with_pathology_details",631
+"patients_with_pathology_details",631
+"pathology_detail_direct_source_fields",13

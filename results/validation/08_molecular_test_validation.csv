@@ -1,0 +1,12 @@
+"metric","value"
+"molecular_test_rows",886
+"unique_molecular_test_ids",886
+"missing_molecular_test_ids",0
+"orphan_molecular_test_follow_up_links",0
+"orphan_molecular_test_patient_links",0
+"molecular_test_parent_patient_mismatches",0
+"molecular_test_parent_pointer_mismatches",0
+"molecular_test_json_pointer_mismatches",0
+"follow_ups_with_molecular_tests",886
+"patients_with_molecular_tests",468
+"molecular_test_direct_source_fields",15

@@ -1,0 +1,11 @@
+"metric","value"
+"patient_rows",633
+"unique_patient_ids",633
+"coad",461
+"read",172
+"source_attribute_nodes",115549
+"observed_schema_path_type_pairs",172
+"previous_schema_path_type_pairs",172
+"schema_discrepancies",0
+"source_copy_checksum_match",1
+"observed_birth_year_count",1

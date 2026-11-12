@@ -1,0 +1,12 @@
+"metric","value"
+"family_history_rows",539
+"unique_family_history_ids",539
+"missing_family_history_ids",0
+"orphan_family_history_patient_links",0
+"family_history_json_pointer_mismatches",0
+"patients_with_family_history_records",539
+"patients_without_family_history_records",94
+"family_history_direct_source_fields",8
+"relative_with_cancer_history_yes",74
+"relative_with_cancer_history_no",463
+"relative_with_cancer_history_unknown",2
