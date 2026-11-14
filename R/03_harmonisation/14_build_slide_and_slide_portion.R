@@ -53,9 +53,9 @@ require_fields(raw_slide, c(
   "portions.portion_id", "portions.submitter_id",
   "slides.slide_id", "slides.submitter_id"
 ), "slide.tsv")
-require_fields(portion, c("portion_id", "sample_id", "portion__submitter_id"), "portion.csv")
-require_fields(sample, c("sample_id", "patient_id", "sample__submitter_id"), "sample.csv")
-require_fields(patient, c("patient_id", "case__submitter_id", "project__project_id"), "patient.csv")
+require_fields(portion, c("portion_id", "sample_id", "portion_submitter_id"), "portion.csv")
+require_fields(sample, c("sample_id", "patient_id", "sample_submitter_id"), "sample.csv")
+require_fields(patient, c("patient_id", "case_submitter_id", "project_project_id"), "patient.csv")
 
 invalid_key <- function(x) is.na(x) | !nzchar(trimws(x)) | x == "'--"
 check_parent <- function(tbl, col, expected, label) {
@@ -98,17 +98,17 @@ compare <- function(left, right, label) {
 }
 checks <- list(
   portion_barcode = compare(raw_slide[["portions.submitter_id"]],
-    portion$portion__submitter_id[portion_idx], "portion barcode"),
+    portion$portion_submitter_id[portion_idx], "portion barcode"),
   sample_id = compare(raw_slide[["samples.sample_id"]],
     sample$sample_id[sample_idx], "sample UUID"),
   sample_barcode = compare(raw_slide[["samples.submitter_id"]],
-    sample$sample__submitter_id[sample_idx], "sample barcode"),
+    sample$sample_submitter_id[sample_idx], "sample barcode"),
   case_id = compare(raw_slide[["cases.case_id"]],
     patient$patient_id[patient_idx], "case UUID"),
   case_barcode = compare(raw_slide[["cases.submitter_id"]],
-    patient$case__submitter_id[patient_idx], "case barcode"),
+    patient$case_submitter_id[patient_idx], "case barcode"),
   project = compare(raw_slide[["project.project_id"]],
-    patient$project__project_id[patient_idx], "project")
+    patient$project_project_id[patient_idx], "project")
 )
 failed_checks <- names(checks)[vapply(checks, any, logical(1))]
 if (length(failed_checks)) stop("Inconsistent slide ancestry: ", paste(failed_checks, collapse = ", "))
@@ -141,7 +141,7 @@ if (anyNA(slide_sample_conflict) || any(slide_sample_conflict)) {
 slide <- data.frame(slide_id = source_slide_ids[first_indices],
                     stringsAsFactors = FALSE, check.names = FALSE)
 for (field in slide_fields) {
-  output_name <- paste0("slide__", sub("^slides\\.", "", field))
+  output_name <- paste0("slide_", sub("^slides\\.", "", field))
   if (output_name %in% names(slide)) stop("Slide output column collision: ", output_name)
   slide[[output_name]] <- raw_slide[[field]][first_indices]
 }
@@ -155,7 +155,7 @@ slide_portion <- data.frame(
 
 if (nrow(slide) != 1998L || any(invalid_key(slide$slide_id)) ||
     anyDuplicated(slide$slide_id)) stop("Slide table primary-key/count checks failed.")
-if (!identical(slide$slide_id, slide$slide__slide_id)) {
+if (!identical(slide$slide_id, slide$slide_slide_id)) {
   stop("Slide ID does not match preserved slides.slide_id field.")
 }
 if (nrow(slide_portion) != 2035L || anyDuplicated(slide_portion[c("slide_id", "portion_id")])) {
@@ -195,7 +195,7 @@ coverage <- do.call(rbind, lapply(slide_fields, function(field) {
   values <- raw_slide[[field]][first_indices]
   data.frame(
     source_column = field,
-    output_column = paste0("slide__", sub("^slides\\.", "", field)),
+    output_column = paste0("slide_", sub("^slides\\.", "", field)),
     slides = length(values),
     gdc_missing_marker = sum(values == "'--", na.rm = TRUE),
     blank_values = sum(is.na(values) | values == ""),

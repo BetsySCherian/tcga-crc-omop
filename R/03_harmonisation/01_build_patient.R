@@ -47,11 +47,11 @@ project_keys <- scalar_keys(lapply(cases, function(x) x$project))
 patient_rows <- lapply(cases, function(x) {
   c(patient_id = scalar_value(x, "case_id"),
     setNames(vapply(case_keys, function(k) scalar_value(x, k), character(1)),
-             paste0("case__", case_keys)),
+             paste0("case_", case_keys)),
     setNames(vapply(demo_keys, function(k) scalar_value(x$demographic, k), character(1)),
-             paste0("demographic__", demo_keys)),
+             paste0("demographic_", demo_keys)),
     setNames(vapply(project_keys, function(k) scalar_value(x$project, k), character(1)),
-             paste0("project__", project_keys)))
+             paste0("project_", project_keys)))
 })
 patient <- as.data.frame(do.call(rbind, patient_rows),
                          stringsAsFactors = FALSE, check.names = FALSE)
@@ -59,8 +59,8 @@ if (nrow(patient) != 633L || anyNA(patient$patient_id) ||
     anyDuplicated(patient$patient_id)) {
   stop("Patient record count or primary key validation failed; no output saved.")
 }
-if (!"project__project_id" %in% names(patient)) stop("Project ID missing")
-project_counts <- table(patient$project__project_id)
+if (!"project_project_id" %in% names(patient)) stop("Project ID missing")
+project_counts <- table(patient$project_project_id)
 if (!identical(unname(as.integer(project_counts[c("TCGA-COAD", "TCGA-READ")])),
                c(461L, 172L))) {
   stop("Project counts differ from the verified 461 COAD / 172 READ baseline.")
@@ -209,8 +209,8 @@ validation <- data.frame(
   value = c(nrow(patient), length(unique(patient$patient_id)),
             unname(project_counts["TCGA-COAD"]), unname(project_counts["TCGA-READ"]),
             nrow(attributes), nrow(current), nrow(previous), nrow(schema_diff),
-            1L, if ("demographic__year_of_birth" %in% names(patient))
-              sum(!is.na(patient$demographic__year_of_birth)) else 0L),
+            1L, if ("demographic_year_of_birth" %in% names(patient))
+              sum(!is.na(patient$demographic_year_of_birth)) else 0L),
   stringsAsFactors = FALSE)
 
 # Write outputs only after validation. The existing .gitignore protects data/;

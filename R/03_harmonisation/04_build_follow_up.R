@@ -110,7 +110,7 @@ rows <- lapply(records, function(r) {
     source_json_pointer = r$source_json_pointer,
     stats::setNames(vapply(scalar_fields,
                            function(key) source_text(f, key), character(1)),
-                    paste0("follow_up__", scalar_fields)))
+                    paste0("follow_up_", scalar_fields)))
 })
 follow_up <- as.data.frame(do.call(rbind, rows),
                            stringsAsFactors = FALSE, check.names = FALSE)
@@ -175,7 +175,7 @@ coverage <- do.call(rbind, lapply(all_fields, function(key) {
   data.frame(
     source_path = paste0("root[].follow_ups[].", key),
     output_column = if (key %in% child_fields) NA_character_
-                    else paste0("follow_up__", key),
+                    else paste0("follow_up_", key),
     source_shape = if (key %in% child_fields) "child_array" else "scalar",
     present_records = sum(present),
     absent_records = sum(!present),

@@ -125,10 +125,10 @@ rows <- lapply(records, function(r) {
     source_json_pointer = r$source_json_pointer,
     stats::setNames(vapply(scalar_fields,
                            function(f) source_text(t, f), character(1)),
-                    paste0("treatment__", scalar_fields)),
+                    paste0("treatment_", scalar_fields)),
     stats::setNames(vapply(array_fields,
                            function(f) array_json(t, f), character(1)),
-                    paste0("treatment__", array_fields, "_json")))
+                    paste0("treatment_", array_fields, "_json")))
 })
 treatment <- as.data.frame(do.call(rbind, rows),
                            stringsAsFactors = FALSE, check.names = FALSE)
@@ -184,7 +184,7 @@ coverage <- do.call(rbind, lapply(all_fields, function(f) {
   }, logical(1))
   data.frame(source_path = paste0("root[].diagnoses[].treatments[].", f),
              output_column = if (f %in% array_fields)
-               paste0("treatment__", f, "_json") else paste0("treatment__", f),
+               paste0("treatment_", f, "_json") else paste0("treatment_", f),
              source_shape = if (f %in% array_fields) "array" else "scalar",
              present_records = sum(is_present),
              absent_records = sum(!is_present),

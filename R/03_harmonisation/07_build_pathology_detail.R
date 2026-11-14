@@ -112,7 +112,7 @@ rows <- lapply(records, function(r) {
     source_json_pointer = r$source_json_pointer,
     stats::setNames(vapply(all_fields, function(field) {
       source_text(r$pathology_detail, field)
-    }, character(1)), paste0("pathology_detail__", all_fields)))
+    }, character(1)), paste0("pathology_detail_", all_fields)))
 })
 pathology_detail <- as.data.frame(do.call(rbind, rows),
                                   stringsAsFactors = FALSE, check.names = FALSE)
@@ -168,7 +168,7 @@ coverage <- do.call(rbind, lapply(all_fields, function(field) {
   }, logical(1))
   data.frame(
     source_path = paste0("root[].diagnoses[].pathology_details[].", field),
-    output_column = paste0("pathology_detail__", field),
+    output_column = paste0("pathology_detail_", field),
     source_shape = "scalar",
     present_records = sum(present),
     absent_records = sum(!present),

@@ -42,8 +42,8 @@ source_required <- c(
   "project.project_id", "cases.case_id", "cases.submitter_id",
   "samples.sample_id", "samples.submitter_id", "portions.portion_id"
 )
-parent_sample_required <- c("sample_id", "patient_id", "sample__submitter_id")
-parent_patient_required <- c("patient_id", "case__submitter_id", "project__project_id")
+parent_sample_required <- c("sample_id", "patient_id", "sample_submitter_id")
+parent_patient_required <- c("patient_id", "case_submitter_id", "project_project_id")
 for (spec in list(
   list(x = raw_portion, fields = source_required, label = "portion.tsv"),
   list(x = sample, fields = parent_sample_required, label = "sample.csv"),
@@ -74,7 +74,7 @@ portion <- data.frame(
   stringsAsFactors = FALSE, check.names = FALSE
 )
 for (field in portion_fields) {
-  output_name <- paste0("portion__", sub("^portions\\.", "", field))
+  output_name <- paste0("portion_", sub("^portions\\.", "", field))
   if (output_name %in% names(portion)) stop("Output column name collision: ", output_name)
   portion[[output_name]] <- raw_portion[[field]]
 }
@@ -83,7 +83,7 @@ for (field in portion_fields) {
 if (any(invalid_key(portion$portion_id)) || anyDuplicated(portion$portion_id)) {
   stop("Portion primary key must be nonmissing and unique for 3217 records.")
 }
-if (!identical(portion$portion_id, portion$portion__portion_id)) {
+if (!identical(portion$portion_id, portion$portion_portion_id)) {
   stop("Preserved portions.portion_id differs from portion_id.")
 }
 if (any(invalid_key(portion$sample_id))) stop("Missing/invalid sample link on Portion.")
@@ -91,7 +91,7 @@ if (any(invalid_key(portion$sample_id))) stop("Missing/invalid sample link on Po
 sample_idx <- match(portion$sample_id, sample$sample_id)
 if (anyNA(sample_idx)) stop("Orphan Portion -> Sample links detected.")
 case_mismatch <- raw_portion[["cases.case_id"]] != sample$patient_id[sample_idx]
-sample_barcode_mismatch <- raw_portion[["samples.submitter_id"]] != sample$sample__submitter_id[sample_idx]
+sample_barcode_mismatch <- raw_portion[["samples.submitter_id"]] != sample$sample_submitter_id[sample_idx]
 if (anyNA(case_mismatch) || any(case_mismatch) ||
     anyNA(sample_barcode_mismatch) || any(sample_barcode_mismatch)) {
   stop("Portion source case/sample barcode conflicts with parent Sample.")
@@ -100,9 +100,9 @@ if (anyNA(case_mismatch) || any(case_mismatch) ||
 patient_idx <- match(sample$patient_id[sample_idx], patient$patient_id)
 if (anyNA(patient_idx)) stop("Portion's parent Sample points to a missing Patient.")
 case_barcode_mismatch <- raw_portion[["cases.submitter_id"]] !=
-  patient$case__submitter_id[patient_idx]
+  patient$case_submitter_id[patient_idx]
 project_mismatch <- raw_portion[["project.project_id"]] !=
-  patient$project__project_id[patient_idx]
+  patient$project_project_id[patient_idx]
 if (anyNA(case_barcode_mismatch) || any(case_barcode_mismatch) ||
     anyNA(project_mismatch) || any(project_mismatch)) {
   stop("Portion case barcode/project conflicts with parent Patient.")
@@ -120,7 +120,7 @@ coverage <- do.call(rbind, lapply(portion_fields, function(field) {
   values <- raw_portion[[field]]
   data.frame(
     source_column = field,
-    output_column = paste0("portion__", sub("^portions\\.", "", field)),
+    output_column = paste0("portion_", sub("^portions\\.", "", field)),
     records = length(values),
     gdc_missing_marker = sum(values == "'--", na.rm = TRUE),
     blank_values = sum(is.na(values) | values == ""),

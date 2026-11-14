@@ -125,7 +125,7 @@ rows <- lapply(records, function(r) {
     source_json_pointer = r$source_json_pointer,
     stats::setNames(vapply(all_fields, function(field) {
       source_text(r$molecular_test, field)
-    }, character(1)), paste0("molecular_test__", all_fields)))
+    }, character(1)), paste0("molecular_test_", all_fields)))
 })
 molecular_test <- as.data.frame(do.call(rbind, rows),
                                 stringsAsFactors = FALSE, check.names = FALSE)
@@ -193,7 +193,7 @@ coverage <- do.call(rbind, lapply(all_fields, function(field) {
   }, logical(1))
   data.frame(
     source_path = paste0("root[].follow_ups[].molecular_tests[].", field),
-    output_column = paste0("molecular_test__", field),
+    output_column = paste0("molecular_test_", field),
     source_shape = "scalar",
     present_records = sum(present),
     absent_records = sum(!present),

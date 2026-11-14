@@ -50,10 +50,10 @@ require_fields(raw_aliquot, c(
   "analytes.analyte_id", "analytes.submitter_id",
   "aliquots.aliquot_id"
 ), "aliquot.tsv")
-require_fields(analyte, c("analyte_id", "portion_id", "analyte__submitter_id"), "analyte.csv")
-require_fields(portion, c("portion_id", "sample_id", "portion__submitter_id"), "portion.csv")
-require_fields(sample, c("sample_id", "patient_id", "sample__submitter_id"), "sample.csv")
-require_fields(patient, c("patient_id", "case__submitter_id", "project__project_id"), "patient.csv")
+require_fields(analyte, c("analyte_id", "portion_id", "analyte_submitter_id"), "analyte.csv")
+require_fields(portion, c("portion_id", "sample_id", "portion_submitter_id"), "portion.csv")
+require_fields(sample, c("sample_id", "patient_id", "sample_submitter_id"), "sample.csv")
+require_fields(patient, c("patient_id", "case_submitter_id", "project_project_id"), "patient.csv")
 
 invalid_key <- function(x) is.na(x) | !nzchar(trimws(x)) | x == "'--"
 check_parent <- function(data, key, expected_rows, label) {
@@ -82,7 +82,7 @@ aliquot <- data.frame(
   check.names = FALSE
 )
 for (field in aliquot_fields) {
-  new_name <- paste0("aliquot__", sub("^aliquots\\.", "", field))
+  new_name <- paste0("aliquot_", sub("^aliquots\\.", "", field))
   if (new_name %in% names(aliquot)) stop("Aliquot output field collision: ", new_name)
   aliquot[[new_name]] <- raw_aliquot[[field]]
 }
@@ -91,7 +91,7 @@ for (field in aliquot_fields) {
 if (any(invalid_key(aliquot$aliquot_id)) || anyDuplicated(aliquot$aliquot_id)) {
   stop("Aliquot primary keys are not all nonmissing and unique.")
 }
-if (!identical(aliquot$aliquot_id, aliquot$aliquot__aliquot_id)) {
+if (!identical(aliquot$aliquot_id, aliquot$aliquot_aliquot_id)) {
   stop("Aliquot ID differs from its original source field.")
 }
 if (any(invalid_key(aliquot$analyte_id))) stop("Invalid Analyte foreign key in Aliquot.")
@@ -115,21 +115,21 @@ compare_values <- function(original, from_parent, label) {
 }
 checks <- list(
   analyte_barcode = compare_values(raw_aliquot[["analytes.submitter_id"]],
-                                   analyte$analyte__submitter_id[analyte_idx], "analyte barcode"),
+                                   analyte$analyte_submitter_id[analyte_idx], "analyte barcode"),
   portion_id = compare_values(raw_aliquot[["portions.portion_id"]],
                               portion$portion_id[portion_idx], "portion UUID"),
   portion_barcode = compare_values(raw_aliquot[["portions.submitter_id"]],
-                                   portion$portion__submitter_id[portion_idx], "portion barcode"),
+                                   portion$portion_submitter_id[portion_idx], "portion barcode"),
   sample_id = compare_values(raw_aliquot[["samples.sample_id"]],
                              sample$sample_id[sample_idx], "sample UUID"),
   sample_barcode = compare_values(raw_aliquot[["samples.submitter_id"]],
-                                  sample$sample__submitter_id[sample_idx], "sample barcode"),
+                                  sample$sample_submitter_id[sample_idx], "sample barcode"),
   case_id = compare_values(raw_aliquot[["cases.case_id"]],
                            patient$patient_id[patient_idx], "case UUID"),
   case_barcode = compare_values(raw_aliquot[["cases.submitter_id"]],
-                                patient$case__submitter_id[patient_idx], "case barcode"),
+                                patient$case_submitter_id[patient_idx], "case barcode"),
   project = compare_values(raw_aliquot[["project.project_id"]],
-                           patient$project__project_id[patient_idx], "project")
+                           patient$project_project_id[patient_idx], "project")
 )
 failures <- names(checks)[vapply(checks, any, logical(1))]
 if (length(failures)) stop("Aliquot source/parent mismatches in: ", paste(failures, collapse = ", "))
@@ -148,7 +148,7 @@ coverage <- do.call(rbind, lapply(aliquot_fields, function(field) {
   v <- raw_aliquot[[field]]
   data.frame(
     source_column = field,
-    output_column = paste0("aliquot__", sub("^aliquots\\.", "", field)),
+    output_column = paste0("aliquot_", sub("^aliquots\\.", "", field)),
     records = length(v),
     gdc_missing_marker = sum(v == "'--", na.rm = TRUE),
     blank_values = sum(is.na(v) | v == ""),

@@ -42,7 +42,7 @@ if (length(missing_columns)) {
        paste(missing_columns, collapse = ", "))
 }
 if (anyDuplicated(names(raw_sample))) stop("Duplicate source TSV column names.")
-if (!all(c("patient_id", "case__submitter_id", "project__project_id") %in%
+if (!all(c("patient_id", "case_submitter_id", "project_project_id") %in%
          names(patient))) {
   stop("Expected Patient source identifiers missing. Run/check 01_build_patient.R.")
 }
@@ -53,7 +53,7 @@ if (nrow(patient) != 633L || anyNA(patient$patient_id) ||
 
 # STEP 2: Build one source-faithful row per sample.
 # The samples.* attributes (including original samples.sample_id) are retained
-# with a sample__ prefix. Patient/project-level attributes belong in Patient.
+# with a sample_ prefix. Patient/project-level attributes belong in Patient.
 source_sample_fields <- grep("^samples\\.", names(raw_sample), value = TRUE)
 if (length(source_sample_fields) != 30L || ncol(raw_sample) != 33L) {
   stop("Sample TSV column inventory changed: expected 30 samples.* of 33 columns; ",
@@ -67,7 +67,7 @@ sample <- data.frame(
   check.names = FALSE
 )
 for (field in source_sample_fields) {
-  output_name <- paste0("sample__", sub("^samples\\.", "", field))
+  output_name <- paste0("sample_", sub("^samples\\.", "", field))
   if (output_name %in% names(sample)) stop("Unexpected output column collision.")
   sample[[output_name]] <- raw_sample[[field]]
 }
@@ -86,16 +86,16 @@ if (length(unique(sample$patient_id)) != 633L ||
     !setequal(sample$patient_id, patient$patient_id)) {
   stop("Sample cohort does not cover the 633 clinical cases as previously validated.")
 }
-if (!identical(sample$sample_id, sample$sample__sample_id)) {
+if (!identical(sample$sample_id, sample$sample_sample_id)) {
   stop("Sample UUID differs from preserved source field.")
 }
 
 # Verify source project and case barcode against the parent Patient record.
 parent_idx <- match(sample$patient_id, patient$patient_id)
 project_mismatch <- (raw_sample[["project.project_id"]] !=
-                     patient$project__project_id[parent_idx])
+                     patient$project_project_id[parent_idx])
 barcode_mismatch <- (raw_sample[["cases.submitter_id"]] !=
-                     patient$case__submitter_id[parent_idx])
+                     patient$case_submitter_id[parent_idx])
 if (anyNA(project_mismatch) || any(project_mismatch) ||
     anyNA(barcode_mismatch) || any(barcode_mismatch)) {
   stop("Sample project / case barcode disagrees with the parent Patient record.")
@@ -114,7 +114,7 @@ coverage <- do.call(rbind, lapply(source_sample_fields, function(field) {
   values <- raw_sample[[field]]
   data.frame(
     source_column = field,
-    output_column = paste0("sample__", sub("^samples\\.", "", field)),
+    output_column = paste0("sample_", sub("^samples\\.", "", field)),
     records = length(values),
     gdc_missing_marker = sum(values == "'--", na.rm = TRUE),
     blank_values = sum(is.na(values) | values == ""),
@@ -123,7 +123,7 @@ coverage <- do.call(rbind, lapply(source_sample_fields, function(field) {
 }))
 
 sample_types <- as.data.frame(
-  table(sample$sample__sample_type, useNA = "ifany"),
+  table(sample$sample_sample_type, useNA = "ifany"),
   stringsAsFactors = FALSE
 )
 names(sample_types) <- c("sample_type", "records")

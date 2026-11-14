@@ -142,10 +142,10 @@ rows <- lapply(records, function(r) {
     source_json_pointer = r$source_json_pointer,
     stats::setNames(vapply(scalar_fields, function(field) {
       source_text(r$attribute, field)
-    }, character(1)), paste0("other_clinical_attribute__", scalar_fields)),
+    }, character(1)), paste0("other_clinical_attribute_", scalar_fields)),
     stats::setNames(vapply(array_fields, function(field) {
       source_array_json(r$attribute, field)
-    }, character(1)), paste0("other_clinical_attribute__", array_fields)))
+    }, character(1)), paste0("other_clinical_attribute_", array_fields)))
 })
 other_clinical_attribute <- as.data.frame(do.call(rbind, rows),
                                            stringsAsFactors = FALSE,
@@ -208,7 +208,7 @@ coverage <- do.call(rbind, lapply(all_fields, function(field) {
   }, logical(1))
   data.frame(
     source_path = paste0("root[].follow_ups[].other_clinical_attributes[].", field),
-    output_column = paste0("other_clinical_attribute__", field),
+    output_column = paste0("other_clinical_attribute_", field),
     source_shape = if (field %in% array_fields) "array_json" else "scalar",
     present_records = sum(present),
     absent_records = sum(!present),
@@ -217,7 +217,7 @@ coverage <- do.call(rbind, lapply(all_fields, function(field) {
   )
 }))
 
-timepoint_col <- "other_clinical_attribute__timepoint_category"
+timepoint_col <- "other_clinical_attribute_timepoint_category"
 timepoint_counts <- as.data.frame(table(
   other_clinical_attribute[[timepoint_col]], useNA = "ifany"),
   stringsAsFactors = FALSE)

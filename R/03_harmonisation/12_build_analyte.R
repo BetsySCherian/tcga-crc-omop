@@ -39,9 +39,9 @@ require_fields(raw_analyte, c(
   "project.project_id", "cases.case_id", "cases.submitter_id",
   "samples.sample_id", "samples.submitter_id", "portions.portion_id",
   "portions.submitter_id", "analytes.analyte_id"), "analyte.tsv")
-require_fields(portion, c("portion_id", "sample_id", "portion__submitter_id"), "portion.csv")
-require_fields(sample, c("sample_id", "patient_id", "sample__submitter_id"), "sample.csv")
-require_fields(patient, c("patient_id", "case__submitter_id", "project__project_id"), "patient.csv")
+require_fields(portion, c("portion_id", "sample_id", "portion_submitter_id"), "portion.csv")
+require_fields(sample, c("sample_id", "patient_id", "sample_submitter_id"), "sample.csv")
+require_fields(patient, c("patient_id", "case_submitter_id", "project_project_id"), "patient.csv")
 
 invalid_key <- function(x) is.na(x) | !nzchar(trimws(x)) | x == "'--"
 check_parent <- function(x, key, expected_n, label) {
@@ -66,7 +66,7 @@ analyte <- data.frame(
   stringsAsFactors = FALSE, check.names = FALSE
 )
 for (field in analyte_fields) {
-  new_name <- paste0("analyte__", sub("^analytes\\.", "", field))
+  new_name <- paste0("analyte_", sub("^analytes\\.", "", field))
   if (new_name %in% names(analyte)) stop("Duplicate output field: ", new_name)
   analyte[[new_name]] <- raw_analyte[[field]]
 }
@@ -75,7 +75,7 @@ for (field in analyte_fields) {
 if (any(invalid_key(analyte$analyte_id)) || anyDuplicated(analyte$analyte_id)) {
   stop("Analyte IDs must be nonmissing and unique.")
 }
-if (!identical(analyte$analyte_id, analyte$analyte__analyte_id)) {
+if (!identical(analyte$analyte_id, analyte$analyte_analyte_id)) {
   stop("Analyte UUID changed during extraction.")
 }
 if (any(invalid_key(analyte$portion_id))) stop("Invalid parent portion_id.")
@@ -91,12 +91,12 @@ mismatch <- function(a, b) {
   a != b
 }
 checks <- list(
-  portion_barcode = mismatch(raw_analyte[["portions.submitter_id"]], portion$portion__submitter_id[portion_idx]),
+  portion_barcode = mismatch(raw_analyte[["portions.submitter_id"]], portion$portion_submitter_id[portion_idx]),
   sample_id = mismatch(raw_analyte[["samples.sample_id"]], sample$sample_id[sample_idx]),
-  sample_barcode = mismatch(raw_analyte[["samples.submitter_id"]], sample$sample__submitter_id[sample_idx]),
+  sample_barcode = mismatch(raw_analyte[["samples.submitter_id"]], sample$sample_submitter_id[sample_idx]),
   case_id = mismatch(raw_analyte[["cases.case_id"]], patient$patient_id[patient_idx]),
-  case_barcode = mismatch(raw_analyte[["cases.submitter_id"]], patient$case__submitter_id[patient_idx]),
-  project = mismatch(raw_analyte[["project.project_id"]], patient$project__project_id[patient_idx])
+  case_barcode = mismatch(raw_analyte[["cases.submitter_id"]], patient$case_submitter_id[patient_idx]),
+  project = mismatch(raw_analyte[["project.project_id"]], patient$project_project_id[patient_idx])
 )
 if (any(vapply(checks, any, logical(1)))) {
   stop("Analyte ancestry mismatch: ", paste(names(checks)[vapply(checks, any, logical(1))], collapse = ", "))
@@ -111,7 +111,7 @@ coverage <- do.call(rbind, lapply(analyte_fields, function(field) {
   x <- raw_analyte[[field]]
   data.frame(
     source_column = field,
-    output_column = paste0("analyte__", sub("^analytes\\.", "", field)),
+    output_column = paste0("analyte_", sub("^analytes\\.", "", field)),
     records = length(x),
     gdc_missing_marker = sum(x == "'--", na.rm = TRUE),
     blank_values = sum(is.na(x) | x == ""),

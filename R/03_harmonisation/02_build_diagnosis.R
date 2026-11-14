@@ -88,14 +88,14 @@ source_text <- function(d, k) {
 }
 
 # Diagnosis_id and patient_id are operational relational keys. Direct source
-# attributes receive the prefix diagnosis__ (same convention as Patient).
+# attributes receive the prefix diagnosis_ (same convention as Patient).
 rows <- lapply(records, function(r) {
   d <- r$diagnosis
   c(diagnosis_id = source_text(d, "diagnosis_id"),
     patient_id = r$patient_id,
     source_json_pointer = r$source_json_pointer,
     stats::setNames(vapply(scalar_fields, function(k) source_text(d, k),
-                            character(1)), paste0("diagnosis__", scalar_fields)))
+                            character(1)), paste0("diagnosis_", scalar_fields)))
 })
 diagnosis <- as.data.frame(do.call(rbind, rows),
                            stringsAsFactors = FALSE, check.names = FALSE)
@@ -153,7 +153,7 @@ coverage <- do.call(rbind, lapply(scalar_fields, function(k) {
     k %in% names(r$diagnosis) && is.null(r$diagnosis[[k]])
   }, logical(1))
   data.frame(source_field = paste0("root[].diagnoses[].", k),
-             output_column = paste0("diagnosis__", k),
+             output_column = paste0("diagnosis_", k),
              present_records = sum(present),
              absent_records = sum(!present),
              explicit_null_records = sum(explicit_null),
